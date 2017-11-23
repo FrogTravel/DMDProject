@@ -17,18 +17,15 @@ cursor.execute(createQueries.CREATE_CLIENT)
 cursor.execute(createQueries.CREATE_LIVES_AT_RELATION_TABLE)
 cursor.execute(createQueries.CREATE_MANAGER)
 cursor.execute(createQueries.CREATE_ALL_CARS)
-cursor.execute(createQueries.CREATE_REFILL_STATION)
 cursor.execute(createQueries.CREATE_CAR)
 cursor.execute(createQueries.CREATE_REFILL_STATION)
 cursor.execute(createQueries.CREATE_CHARGE_EVENT)
-print(createQueries.CREATE_ORDER)
 cursor.execute(createQueries.CREATE_ORDER)
 cursor.execute(createQueries.CREATE_PAYMENT)
+cursor.execute(createQueries.CREATE_VIDEO)
 
 
 
 # rows = cursor.fetchall()
 # for row in rows:
 #     print(row)
-
-print(createQueries.CREATE_LIVES_AT_RELATION_TABLE)

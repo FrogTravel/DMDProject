@@ -11,8 +11,10 @@ import DBStructure
 # TODO Not sure that manager id is not null...
 CREATE_ORDER = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.ORDER_TABLE_NAME + ' (' \
                + DBStructure.ORDER_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
-               + DBStructure.ORDER_TABLE_FIELD_STARTING_POSITION + ' varchar(255) NOT NULL,' \
-               + DBStructure.ORDER_TABLE_FIELD_DESTINATION + ' varchar(255) NOT NULL, ' \
+               + DBStructure.ORDER_TABLE_FIELD_STARTING_POSITION_LAT + ' real NOT NULL, ' \
+               + DBStructure.ORDER_TABLE_FIELD_STARTING_POSITION_LNG + ' real NOT NULL, ' \
+               + DBStructure.ORDER_TABLE_FIELD_DESTINATION_LAT + ' real NOT NULL, ' \
+               + DBStructure.ORDER_TABLE_FIELD_DESTINATION_LNG + ' real NOT NULL, ' \
                + DBStructure.ORDER_TABLE_FIELD_START_TIME + ' datetime NOT NULL,' \
                + DBStructure.ORDER_TABLE_FIELD_END_TIME + ' datetime NOT NULL,' \
                + DBStructure.ORDER_TABLE_FIELD_PRICE + ' integer NOT NULL, ' \
@@ -56,7 +58,6 @@ CREATE_CLIENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CLIENT_TABLE_NAME + 
 CREATE_CAR = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CAR_TABLE_NAME + ' (' \
              + DBStructure.CAR_TABLE_FIELD_UID + ' integer PRIMARY KEY,' \
              + DBStructure.CAR_TABLE_FIELD_CHARGE_LEVEL + ' real NOT NULL,' \
-             + DBStructure.CAR_TABLE_FIELD_LOCATION + ' varchar(10) NOT NULL,' \
              + DBStructure.CAR_TABLE_LAT + ' real NOT NULL,' \
              + DBStructure.CAR_TABLE_LNG + ' real NOT NULL,' \
              + DBStructure.CAR_TABLE_ALL_CARS + ' integer NOT NULL REFERENCES ' \
@@ -137,4 +138,4 @@ CREATE_PAYMENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.PAYMENT_TABLE_NAME 
                  + DBStructure.ORDER_TABLE_NAME + ',' \
                  + DBStructure.PAYMENT_TABLE_FIELD_HASH_CREDIT_CARD + ' varchar(255) PRIMARY KEY' \
                                                                       ');'
-# + DBStructure.PAYMENT_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
+# + DBStructure.PAYMENT_TABLE_FIELD_ID + ' integer PRIMARY KEY,'

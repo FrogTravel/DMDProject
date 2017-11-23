@@ -51,7 +51,7 @@ CREATE_CLIENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CLIENT_TABLE_NAME + 
 # TODO 'record' weak relationship one-to-many with weak entity Video
 CREATE_CAR = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CAR_TABLE_NAME + ' (' \
              + DBStructure.CAR_TABLE_FIELD_UID + ' integer PRIMARY KEY,' \
-             + DBStructure.CAR_TABLE_FIELD_CHARGE_LEVEL + ' varchar(10) NOT NULL,' \
+             + DBStructure.CAR_TABLE_FIELD_CHARGE_LEVEL + ' real NOT NULL,' \
              + DBStructure.CAR_TABLE_FIELD_LOCATION + ' varchar(10) NOT NULL,' \
              + DBStructure.CAR_TABLE_LAT + ' real NOT NULL,' \
              + DBStructure.CAR_TABLE_LNG + ' real NOT NULL,' \

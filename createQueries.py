@@ -29,6 +29,7 @@ CREATE_ORDER = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.ORDER_TABLE_NAME + ' 
 
 # TODO 'lives at' is 0...N to 1..N relationship
 # AM... No Primary key at this table, so let it be some ID
+# 2 Normalization done
 CREATE_LOCATION = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.LOCATION_TABLE_NAME + ' (' \
                   + DBStructure.LOCATION_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
                   + DBStructure.LOCATION_TABLE_FIELD_COUNTRY + ' varchar(255) NOT NULL, ' \
@@ -41,9 +42,12 @@ CREATE_LOCATION = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.LOCATION_TABLE_NAM
 # Not sure DATA is the right one
 CREATE_CLIENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CLIENT_TABLE_NAME + ' (' \
                 + DBStructure.CLIENT_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
-                + DBStructure.CLIENT_TABLE_FIELD_USERNAME + ' varchar(255) NOT NULL, ' \
+                + DBStructure.CLIENT_TABLE_FIELD_FULLNAME + ' varchar(255) NOT NULL,' \
                 + DBStructure.CLIENT_TABLE_FIELD_DATE_OF_BIRTH + ' DATA NOT NULL' \
                                                                  ');'
+
+# + DBStructure.CLIENT_TABLE_FIELD_USERNAME + ' varchar(255) NOT NULL, ' \
+
 
 # what are sizes of number and model fields?
 # maybe location must be splited to langitude latitude, because else what is type of this shit?
@@ -129,8 +133,8 @@ CREATE_ALL_CARS = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.ALL_CARS_TABLE_NAM
                                                         ');'
 
 CREATE_PAYMENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.PAYMENT_TABLE_NAME + ' (' \
-                 + DBStructure.PAYMENT_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
                  + DBStructure.PAYMENT_TABLE_FIELD_ORDER_ID + ' integer NOT NULL REFERENCES ' \
                  + DBStructure.ORDER_TABLE_NAME + ',' \
-                 + DBStructure.PAYMENT_TABLE_FIELD_HASH_CREDIT_CARD + ' varchar(255) NOT NULL' \
-                                                                                     ');'
+                 + DBStructure.PAYMENT_TABLE_FIELD_HASH_CREDIT_CARD + ' varchar(255) PRIMARY KEY' \
+                                                                      ');'
+# + DBStructure.PAYMENT_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \

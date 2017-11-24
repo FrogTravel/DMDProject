@@ -1,9 +1,9 @@
 import sqlite3
-import createQueries
+import createQueries, selectQueries
 #http://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 
 
-conn = sqlite3.connect(r"/Users/ekaterina/PycharmProjects/DMDProject3/myfirstdb.db")
+conn = sqlite3.connect(r"C:\Users\Aline\PycharmProjects\DMDProject\myfirstdb.db", detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
 cursor = conn.cursor()
 
 # cursor.execute("CREATE TABLE IF NOT EXISTS TestTable ("
@@ -24,7 +24,22 @@ cursor.execute(createQueries.CREATE_ORDER)
 cursor.execute(createQueries.CREATE_PAYMENT)
 cursor.execute(createQueries.CREATE_VIDEO)
 
+# query1: red car
+print("Possible cars:")
+cursor.execute(selectQueries.RED_CAR)
+row = cursor.fetchone()
+while row is not None:
+    print("Model: {0}, number {1}\n".format(row[0], row[1]))
+    row = cursor.fetchone()
 
+# query2: charger statistics
+# text = input("Write the date to get the statictics: ")
+
+cursor.execute(selectQueries.ALL_CARS)
+row = cursor.fetchone()
+count = row[0]
+
+# TODO cursor.execute("SELECT " + DBStructure.ALL_CARS_FIELD_NUMBER + ", color" + " FROM All_Cars WHERE color = '%s'" %'red')
 
 # rows = cursor.fetchall()
 # for row in rows:

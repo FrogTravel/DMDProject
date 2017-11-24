@@ -60,10 +60,10 @@ CREATE_CAR_LOG = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CAR_LOG_TABLE_NAME 
                  + DBStructure.CAR_LOG_TABLE_FIELD_CHARGE_LEVEL + ' real NOT NULL,' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_LAT + ' real NOT NULL,' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_LNG + ' real NOT NULL,' \
-                 + DBStructure.CAR_LOG_TABLE_FIELD_TIME + 'datetime NOT NULL, ' \
+                 + DBStructure.CAR_LOG_TABLE_FIELD_TIME + ' datetime NOT NULL, ' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_ALL_CARS + ' integer NOT NULL REFERENCES ' \
                  + DBStructure.ALL_CARS_TABLE_NAME + ', ' \
-                                                     'PRIMARY KEY (' \
+                                                     ' PRIMARY KEY (' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_ALL_CARS + ', ' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_TIME + ')' \
                                                           ');'
@@ -97,7 +97,7 @@ CREATE_REFILL_STATION_HISTORY = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.REFI
                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID + ' integer NOT NULL REFERENCES ' \
                                 + DBStructure.REFILL_STATION_TABLE_NAME + ', ' \
                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE + ' datetime NOT NULL,' \
-                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_AMOUNT_OF_FREE_CHARGER + 'integer NOT NULL,' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_AMOUNT_OF_FREE_CHARGER + ' integer NOT NULL,' \
                                                                                                           ' PRIMARY KEY ( ' \
                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID + ',' \
                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE + ')' \

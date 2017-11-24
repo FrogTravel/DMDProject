@@ -61,12 +61,14 @@ CREATE_CAR_LOG = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CAR_LOG_TABLE_NAME 
                  + DBStructure.CAR_LOG_TABLE_FIELD_LAT + ' real NOT NULL,' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_LNG + ' real NOT NULL,' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_TIME + ' datetime NOT NULL, ' \
+                 + DBStructure.CAR_LOG_TABLE_FIELD_ORDER_ID + ' integer NOT NULL REFERENCES ' \
+                 + DBStructure.ORDER_TABLE_NAME + ',' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_ALL_CARS + ' integer NOT NULL REFERENCES ' \
                  + DBStructure.ALL_CARS_TABLE_NAME + ', ' \
-                                                     ' PRIMARY KEY (' \
+                                                     'PRIMARY KEY (' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_ALL_CARS + ', ' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_TIME + ')' \
-                                                          ');'
+                                                  ');'
 
 # same problem with start_time
 # what is the type of content

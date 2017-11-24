@@ -1,9 +1,13 @@
 import sqlite3
+
+import DBStructure
 import createQueries
+import insertData
+
 #http://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 
 
-conn = sqlite3.connect(r"/Users/ekaterina/PycharmProjects/DMDProject3/myfirstdb.db")
+conn = sqlite3.connect(DBStructure.DB_FILENAME)
 cursor = conn.cursor()
 
 # cursor.execute("CREATE TABLE IF NOT EXISTS TestTable ("
@@ -24,7 +28,10 @@ cursor.execute(createQueries.CREATE_ORDER)
 cursor.execute(createQueries.CREATE_PAYMENT)
 cursor.execute(createQueries.CREATE_VIDEO)
 
+insertData.gen_random_data(cursor)
 
+conn.commit()
+conn.close()
 
 # rows = cursor.fetchall()
 # for row in rows:

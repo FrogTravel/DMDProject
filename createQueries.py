@@ -44,7 +44,7 @@ CREATE_LOCATION = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.LOCATION_TABLE_NAM
 # Not sure DATA is the right one
 CREATE_CLIENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CLIENT_TABLE_NAME + ' (' \
                 + DBStructure.CLIENT_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
-                + DBStructure.CLIENT_TABLE_FIELD_USERNAME + ' varchar(255) NOT NULL' \
+                + DBStructure.CLIENT_TABLE_FIELD_USERNAME + ' varchar(255) NOT NULL, ' \
                 + DBStructure.CLIENT_TABLE_FIELD_DATE_OF_BIRTH + ' DATA NOT NULL' \
                                                                  ');'
 
@@ -60,12 +60,15 @@ CREATE_CAR_LOG = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.CAR_LOG_TABLE_NAME 
                  + DBStructure.CAR_LOG_TABLE_FIELD_CHARGE_LEVEL + ' real NOT NULL,' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_LAT + ' real NOT NULL,' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_LNG + ' real NOT NULL,' \
+                 + DBStructure.CAR_LOG_TABLE_FIELD_TIME + ' datetime NOT NULL, ' \
+                 + DBStructure.CAR_LOG_TABLE_FIELD_ORDER_ID + ' integer NOT NULL REFERENCES ' \
+                 + DBStructure.ORDER_TABLE_NAME + ',' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_ALL_CARS + ' integer NOT NULL REFERENCES ' \
                  + DBStructure.ALL_CARS_TABLE_NAME + ', ' \
                                                      'PRIMARY KEY (' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_ALL_CARS + ', ' \
                  + DBStructure.CAR_LOG_TABLE_FIELD_TIME + ')' \
-                                                          ');'
+                                                  ');'
 
 # same problem with start_time
 # what is the type of content
@@ -76,7 +79,11 @@ CREATE_VIDEO = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.VIDEO_TABLE_NAME + ' 
                + DBStructure.VIDEO_TABLE_FIELD_START_TIME + ' varchar(255) NOT NULL,' \
                + DBStructure.VIDEO_TABLE_FIELD_ALL_CARS_ID + ' integer NOT NULL REFERENCES ' \
                + DBStructure.ALL_CARS_TABLE_NAME + ', ' \
-               + DBStructure.VIDEO_TABLE_FIELD_CONTENT + ' varchar(255) NOT NULL' \
+               + DBStructure.VIDEO_TABLE_FIELD_CONTENT + ' varchar(255) NOT NULL,' \
+                                                         ' PRIMARY KEY (' \
+               + DBStructure.VIDEO_TABLE_FIELD_START_TIME + ', ' \
+               + DBStructure.VIDEO_TABLE_FIELD_ALL_CARS_ID + ')' \
+                                                             ');' \
     #               + DBStructure.VIDEO_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \                                                         ');'
 
 # TODO 'accept' is weak relationship many-to-one with Charger
@@ -88,17 +95,17 @@ CREATE_REFILL_STATION = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.REFILL_STATI
                         + DBStructure.REFILL_STATION_TABLE_FIELD_TOTAL_AMOUNT_OF_CHARGERS + ' integer NOT NULL ' \
                                                                                             ');'
 
-CREATE_CHARGE_EVENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.REFILL_STATION_HISTORY_TABLE_NAME + ' (' \
-                      + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
-                      + DBStructure.CHARGE_EVENT_TABLE_FIELD_CAR_ID + ' integer NOT NULL REFERENCES ' \
-                      + DBStructure.ALL_CARS_TABLE_NAME + ',' \
-                      + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID + ' integer NOT NULL REFERENCES ' \
-                      + DBStructure.REFILL_STATION_TABLE_NAME + ', ' \
-                      + DBStructure.CHARGE_EVENT_TABLE_FIELD_COST + ' integer NOT NULL,' \
-                      + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE + ' datetime NOT NULL,' \
-                      + DBStructure.CHARGE_EVENT_TABLE_FIELD_CHARGE_TIME + ' integer NOT NULL, ' \
-                      + DBStructure.CHARGE_EVENT_TABLE_FIELD_ARRIVAL_TIME + ' datetime NOT NULL ' \
-                                                                            ');'
+CREATE_REFILL_STATION_HISTORY = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.REFILL_STATION_HISTORY_TABLE_NAME + ' (' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID + ' integer NOT NULL REFERENCES ' \
+                                + DBStructure.REFILL_STATION_TABLE_NAME + ', ' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE + ' datetime NOT NULL,' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_AMOUNT_OF_FREE_CHARGER + ' integer NOT NULL,' \
+                                                                                                          ' PRIMARY KEY ( ' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID + ',' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE + ')' \
+                                                                                        ');'
+#                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
+
 
 CREATE_MANAGER = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.MANAGER_TABLE_NAME + ' (' \
                  + DBStructure.MANAGER_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
@@ -123,14 +130,15 @@ CREATE_LIVES_AT_RELATION_TABLE = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.REL
 CREATE_ALL_CARS = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.ALL_CARS_TABLE_NAME + ' (' \
                   + DBStructure.ALL_CARS_FIELD_ID + ' integer PRIMARY KEY, ' \
                   + DBStructure.ALL_CARS_FIELD_COLOR + ' varchar(255) NOT NULL, ' \
-                  + DBStructure.ALL_CARS_FIELD_MANUFACTURE + ' varchar(255) NOT NULL, ' \
-                                                             '' \
+                  + DBStructure.ALL_CARS_FIELD_MODEL + ' varchar(255) NOT NULL,' \
                   + DBStructure.ALL_CARS_FIELD_NUMBER + ' varchar(255) NOT NULL ' \
                                                         ');'
 
 CREATE_PAYMENT = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.PAYMENT_TABLE_NAME + ' (' \
                  + DBStructure.PAYMENT_TABLE_FIELD_ORDER_ID + ' integer NOT NULL REFERENCES ' \
                  + DBStructure.ORDER_TABLE_NAME + ',' \
-                 + DBStructure.PAYMENT_TABLE_FIELD_HASH_CREDIT_CARD + ' varchar(255) PRIMARY KEY' \
-                                                                      ');'
+                 + DBStructure.PAYMENT_TABLE_FIELD_HASH_CREDIT_CARD + ' varchar(255) NOT NULL,' \
+                                                                      'PRIMARY KEY (' \
+                 + DBStructure.PAYMENT_TABLE_FIELD_ORDER_ID + ')' \
+                                                              ');'
 # + DBStructure.PAYMENT_TABLE_FIELD_ID + ' integer PRIMARY KEY,'

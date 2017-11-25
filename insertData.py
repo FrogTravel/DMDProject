@@ -44,8 +44,8 @@ def gen_random_refill_station(cursor):
 def gen_refill_station_history(cursor, rs_id, n):
     table_name = DBStructure.REFILL_STATION_HISTORY_TABLE_NAME
     fields = (DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID,
-              DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE,
-              DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_AMOUNT_OF_FREE_CHARGER)
+              DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_TIME,
+              DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_AMOUNT_OF_OCCUPIED_CHARGER)
     d1 = datetime.strptime('8/1/2017 1:30 PM', '%m/%d/%Y %I:%M %p')
     d2 = datetime.strptime('11/1/2017 4:50 AM', '%m/%d/%Y %I:%M %p')
     d = random_date(d1, d2)

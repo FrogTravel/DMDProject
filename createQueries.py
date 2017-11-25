@@ -98,11 +98,11 @@ CREATE_REFILL_STATION = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.REFILL_STATI
 CREATE_REFILL_STATION_HISTORY = 'CREATE TABLE IF NOT EXISTS ' + DBStructure.REFILL_STATION_HISTORY_TABLE_NAME + ' (' \
                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID + ' integer NOT NULL REFERENCES ' \
                                 + DBStructure.REFILL_STATION_TABLE_NAME + ', ' \
-                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE + ' datetime NOT NULL,' \
-                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_AMOUNT_OF_FREE_CHARGER + ' integer NOT NULL,' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_TIME + ' datetime NOT NULL,' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_AMOUNT_OF_OCCUPIED_CHARGER + ' integer NOT NULL,' \
                                                                                                           ' PRIMARY KEY ( ' \
                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_REFILL_STATION_ID + ',' \
-                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_DATE + ')' \
+                                + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_TIME + ')' \
                                                                                         ');'
 #                                 + DBStructure.REFILL_STATION_HISTORY_TABLE_FIELD_ID + ' integer PRIMARY KEY,' \
 
